@@ -1,0 +1,112 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.logo {
+  height: 35px;
+  width: 30px;
+}
+
+.text-wrapper {
+  color: var(--primary-color);
+  font-family: var(--font-big);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.desktop-nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.desktop-nav li {
+  margin: 0 30px;
+  cursor: pointer;
+  font-family: var(--small-font);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.mobile-nav {
+  position: fixed;
+  margin-top: 90px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 60%;
+  background-color: rgba(255, 255, 255, 0.95);
+  z-index: 1001;
+  transform: translateX(100%); /* initially it's off the viewport */
+  transition: transform 0.3s ease-in-out;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* When mobile nav is active, slide it in */
+.showMobileNav .mobile-nav {
+  transform: translateX(0);
+}
+
+.mobile-nav.open {
+  right: 0;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.mobile-nav li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.mobile-nav li:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.mobile-nav img {
+  cursor: pointer;
+  width: 30px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+/* for larger screens (desktops) */
+@media (min-width: 768px) {
+  .header {
+    margin-top: 50px;
+  }
+  .mobile-nav,
+  .mobile-nav img,
+  .mobile-nav-icon {
+    display: none;
+  }
+
+  .desktop-nav {
+    display: block;
+  }
+}
+
+/* for smaller screens (mobiles) */
+@media (max-width: 767px) {
+  .header {
+    margin-top: 20px;
+  }
+  .mobile-nav img {
+    display: block;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+}
