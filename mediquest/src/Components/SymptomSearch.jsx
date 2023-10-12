@@ -25,7 +25,6 @@ const SymptomSearch = ({ setSelectedSymptoms }) => {
         {suggestions.map((symptom, index) => (
           <div key={index} onClick={() => handleSelectedSymptoms(symptom)}>
             {symptom} <img src={PlusIcon} alt="plus icon" />
-            autoFocus
           </div>
         ))}
       </div>
