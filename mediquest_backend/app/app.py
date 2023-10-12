@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from recommendations import get_suggested_diseases
+from recommendations import get_suggested_diseases, calculate_urgency
 
 app = Flask(__name__)
 
@@ -35,8 +35,9 @@ def suggest_diseases():
     selected_symptoms = data.get('selected_symptoms', [])
 
     suggested_diseases = get_suggested_diseases(selected_symptoms)
+    urgency_level = calculate_urgency(selected_symptoms)
 
-    return jsonify({'suggested_diseases': suggested_diseases})
+    return jsonify({'suggested_diseases': suggested_diseases, 'urgency_level': urgency_level})
 
 if __name__ == '__main__':
     app.run(debug=True)
