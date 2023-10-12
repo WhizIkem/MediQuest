@@ -11,7 +11,7 @@ function App() {
       .then(response => response.json())
       .then(symptomsData => {
         console.log(symptomsData); // Log the symptoms data
-        // Handle the symptoms data as needed in your React app
+        // Handle the symptoms data
         setData(symptomsData);
       })
       .catch(error => console.error('Error:', error));
