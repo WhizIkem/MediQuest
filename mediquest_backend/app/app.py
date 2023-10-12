@@ -1,7 +1,9 @@
+from recommendations.recommendation import get_suggested_diseases, calculate_urgency
 from flask import Flask, request, jsonify
-from recommendations import get_suggested_diseases, calculate_urgency
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/suggest_diseases', methods=['POST'])
 def suggest_diseases():
