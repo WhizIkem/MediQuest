@@ -1,4 +1,5 @@
-from recommendations.recommendation import get_suggested_diseases, calculate_urgency
+from recommendation import get_suggested_diseases, calculate_urgency
+from data import Symptoms
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -40,6 +41,13 @@ def suggest_diseases():
     urgency_level = calculate_urgency(selected_symptoms)
 
     return jsonify({'suggested_diseases': suggested_diseases, 'urgency_level': urgency_level})
+
+@app.route('/get_symptoms', methods=['GET'])
+def get_symptoms():
+    """
+    Endpoint to get the list of symptoms.
+    """
+    return jsonify({'symptoms': Symptoms})
 
 if __name__ == '__main__':
     app.run(debug=True)
