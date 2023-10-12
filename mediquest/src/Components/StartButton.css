@@ -1,0 +1,21 @@
+.start-button {
+  align-items: center;
+  background-color: #007b8a;
+  border: 2px solid;
+  border-color: #000000;
+  border-radius: 5px;
+  display: inline-flex;
+  gap: 10px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 10px 18px;
+  position: relative;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 50px; 
+}
+
+.start-button:hover {
+  background-color: #005b6a;
+  cursor: pointer;
+}

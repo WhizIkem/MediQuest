@@ -1,0 +1,31 @@
+.hero-text-wrapper {
+  color: #001f3f;
+  font-family: var(--font-small);
+  font-size: 48px;
+  font-weight: 700;
+  margin-top: 50px;
+}
+
+.descriptive-text-wrapper {
+  color: #001f3f;
+  font-family: var(--font-small);
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 50px;
+}
+
+.homepage-text-wrapper {
+  color: #001f3f;
+  font-family: var(--font-small);
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 50px;
+}
+
+.mediquest-benefits {
+  color: #001f3f;
+  font-family: var(--font-small);
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 50px;
+}
