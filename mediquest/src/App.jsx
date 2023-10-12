@@ -1,28 +1,24 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Header } from "./Components/Header";
-import { HeroText } from "./Components/HeroText";
-import { DescriptiveText } from "./Components/DescriptiveText";
-import {StartButton} from "./Components/StartButton";
-import ImageModule from "./Components/ImageModule";
-import image1 from "./Assets/Image1.jpg";
-import image2 from "./Assets/Image2.jpg";
-import { HomeText } from "./Components/HomeText";
+import Footer from "./Components/Footer";
+import Homepage from "./Components/Pages/Homepage"; // Import your HomePage component
+// Import other pages/components as needed
 
 const App = () => {
-  const handleStartButtonClick = () => {
-    // Handle the start button click
-    }
-  
   return (
-    <div className="App">
-      <Header />
-      <HeroText />
-      <DescriptiveText />
-      <StartButton onClick={handleStartButtonClick} />
-      <ImageModule src={image1} alt="image1" className="image1" />
-      <HomeText /> 
-      <ImageModule src={image2} alt="image2" className="image2" />
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route>
+            <Route path="/" element={<Homepage />} />
+            {/* Add other routes as needed */}
+          </Route>
+          </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
