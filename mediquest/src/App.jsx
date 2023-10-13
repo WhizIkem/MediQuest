@@ -3,8 +3,11 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Header } from "./Components/Header";
 import Footer from "./Components/Footer";
 import Homepage from "./Components/Pages/Homepage";
-import SymptomChecker from "./Components/Pages/SymptomChecker";
+import SymptomChecker from "./Components/Pages/SymptomCheckerPage";
 import "./App.css";
+import SymptomCheckerPage from "./Components/Pages/SymptomCheckerPage";
+import DiseasesPage from "./Components/Pages/DiseasesPage";
+import AboutUs from "./Components/Pages/AboutUs";
 
 const App = () => {
   return (
@@ -15,7 +18,9 @@ const App = () => {
           <Routes>
             <Route>
               <Route path="/" element={<Homepage />} />
-              <Route path="/symptom-checker" element={<SymptomChecker />} />
+              <Route path="/symptom-checker" element={<SymptomCheckerPage />} />
+              <Route path="/diseases" element={<DiseasesPage />} />
+              <Route path="/about-us" element={<AboutUs />} />
             </Route>
             </Routes>
         </div>
