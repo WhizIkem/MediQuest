@@ -1,0 +1,14 @@
+/* DeveloperCard.css */
+.developer-card-container {
+  border: 1px solid #eaeaea;
+  padding: 20px;
+  border-radius: 8px; 
+  text-align: left;
+  margin: 10px;
+}
+
+.developer-image {
+  width: 100px;
+  height: 100px; 
+  margin-bottom: 15px;
+}

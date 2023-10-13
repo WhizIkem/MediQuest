@@ -1,14 +1,18 @@
 import React from "react";
 import SymptomCheckText from "../SymptomCheckText";
 import SymptomsContainer from "../SymptomsContainer";
+import SymptomsChecker from "../SymptomsChecker";
+import Disclaimer from "../Disclaimer";
 
-const SymptomChecker = () => {
+const SymptomCheckerPage = () => {
   return (
     <>
       <SymptomCheckText />
       <SymptomsContainer />
+      <SymptomsChecker />
+      <Disclaimer />
     </>
   );
 }
 
-export default SymptomChecker;
+export default SymptomCheckerPage;
