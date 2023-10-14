@@ -17,6 +17,8 @@ def get_suggested_diseases(selected_symptoms):
         common_symptoms = set(selected_symptoms) & set(symptoms)
         if common_symptoms:
             suggested_diseases.append({'disease': disease, 'common_symptoms': list(common_symptoms)})
+    #filtering out diseases with empty common_symptoms
+    suggested_diseases = [disease for disease in suggested_diseases if disease['common_symptoms']]
 
     #also returns the full list of symptoms for reference
     all_symptoms = Symptoms
