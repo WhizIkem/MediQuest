@@ -49,6 +49,15 @@ def get_symptoms():
     """
     return jsonify({'symptoms': Symptoms})
 
+@app.route('/all_symptoms', methods=['GET'])
+def get_all_symptoms():
+    """
+    Endpoint to get the list of symptoms.
+    """
+
+    return jsonify({'all_symptoms': Symptoms})
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
