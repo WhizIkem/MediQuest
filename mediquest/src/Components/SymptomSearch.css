@@ -1,0 +1,21 @@
+.suggestions-container {
+  position: relative;
+  max-width: 300px;
+  margin-top: 10px;
+}
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  z-index: 1;
+}
+
+.suggestions div {
+  cursor: pointer;
+  padding: 8px;
+}

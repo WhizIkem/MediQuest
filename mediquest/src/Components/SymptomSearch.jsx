@@ -41,6 +41,7 @@ const SymptomSearch = ({ setSelectedSymptoms }) => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
+	  <div className="suggestions-container">
       {searchTerm &&
         <div className="suggestions">
           {suggestions.map((symptom, index) => (
@@ -51,6 +52,7 @@ const SymptomSearch = ({ setSelectedSymptoms }) => {
         </div>
       }
     </div>
+	  </div>
   );
 }
 
