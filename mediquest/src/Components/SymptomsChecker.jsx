@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-// ... (other imports)
 
 const SymptomChecker = ({ selectedSymptoms = [] }) => {
   const navigate = useNavigate();
+  const [urgencyLevel, setUrgencyLevel] = useState(""); // State to store urgency level
 
   const handleSubmit = async () => {
     try {
@@ -18,19 +17,13 @@ const SymptomChecker = ({ selectedSymptoms = [] }) => {
 
       console.log("Response status:", response.status);
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
       const data = await response.json();
       console.log("Data received:", data);
 
-      // Check if 'suggested_diseases' is available in the response
-      if (data && data.suggested_diseases) {
-        navigate("/diseases", { state: { diseases: data.suggested_diseases } });
-      } else {
-        console.error('No suggested diseases found in the response');
-      }
+      // Update state with urgency level
+      setUrgencyLevel(data.urgency_level);
+
+      navigate("/diseases", { state: { diseases: data.suggested_diseases } });
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error.message);
     }
@@ -42,6 +35,9 @@ const SymptomChecker = ({ selectedSymptoms = [] }) => {
         {selectedSymptoms && selectedSymptoms.map((symptom, index) => (
           <span key={index}>{symptom}</span>
         ))}
+      </div>
+      <div>
+        <strong>Urgency Level:</strong> {urgencyLevel}
       </div>
       <button onClick={handleSubmit}>Check Symptoms</button>
     </div>
