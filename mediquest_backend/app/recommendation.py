@@ -13,18 +13,21 @@ def get_suggested_diseases(selected_symptoms):
 
     """
     suggested_diseases = []
-    for disease, symptoms in Diseases.items():
-        common_symptoms = set(selected_symptoms) & set(symptoms)
+    selected_symptoms_lower = [symptom.lower() for symptom in selected_symptoms]
+    
+    for disease, symptoms_list in Diseases.items():
+        common_symptoms = set(selected_symptoms_lower) & set(symptom.lower() for symptom in symptoms_list)
         if common_symptoms:
-            urgency_level = calculate_urgency(selected_symptoms)
+            other_symptoms = [symptom for symptom in symptoms_list if symptom.lower() not in common_symptoms]
             suggested_diseases.append({
                 'disease': disease,
                 'common_symptoms': list(common_symptoms),
-                'urgency_level': urgency_level
+                'other_symptoms': other_symptoms
             })
 
-    #with this we remove diseases without common symptoms
+    # Filtering out diseases with empty common_symptoms
     suggested_diseases = [disease for disease in suggested_diseases if disease['common_symptoms']]
+
 
     # Also returns the full list of symptoms for reference sake
     all_symptoms = Symptoms
