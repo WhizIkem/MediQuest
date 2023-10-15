@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * SymptomChecker component for selecting symptoms and checking for suggested diseases.
+ * @param {Object} props - Component properties.
+ * @param {string[]} props.selectedSymptoms - Array of selected symptoms.
+ * @returns {JSX.Element} - Rendered component.
+ */
 const SymptomChecker = ({ selectedSymptoms = [] }) => {
   const navigate = useNavigate();
-  const [urgencyLevel, setUrgencyLevel] = useState(""); // State to store urgency level
 
+  /**
+   * Handle the submission of selected symptoms and fetch suggested diseases.
+   */
   const handleSubmit = async () => {
     try {
+      // Fetch data from the backend
       const response = await fetch('http://localhost:5000/suggest_diseases', {
         method: 'POST',
         headers: {
@@ -17,28 +26,38 @@ const SymptomChecker = ({ selectedSymptoms = [] }) => {
 
       console.log("Response status:", response.status);
 
+      // Check if the response is successful
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      // Parse the JSON data
       const data = await response.json();
       console.log("Data received:", data);
 
-      // Update state with urgency level
-      setUrgencyLevel(data.urgency_level);
+      // Check if 'suggested_diseases' is available in the response
+      if (data && data.suggested_diseases) {
+        console.log("Suggested Diseases:", data.suggested_diseases);
 
-      navigate("/diseases", { state: { diseases: data.suggested_diseases } });
+        // Navigate to the DiseasesPage with the suggested diseases in the state
+        navigate("/diseases", { state: { diseases: data.suggested_diseases } });
+      } else {
+        console.error('No suggested diseases found in the response');
+      }
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error.message);
     }
-  }
+  };
 
   return (
     <div>
       <div>
+        {/* Display selected symptoms */}
         {selectedSymptoms && selectedSymptoms.map((symptom, index) => (
           <span key={index}>{symptom}</span>
         ))}
       </div>
-      <div>
-        <strong>Urgency Level:</strong> {urgencyLevel}
-      </div>
+      {/* Button to check symptoms */}
       <button onClick={handleSubmit}>Check Symptoms</button>
     </div>
   );

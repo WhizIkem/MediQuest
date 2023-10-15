@@ -1,41 +1,33 @@
 from data import Diseases, Symptoms
+from typing import List, Dict
 
-def get_suggested_diseases(selected_symptoms):
+
+def get_suggested_diseases(selected_symptoms: List[str]) -> List[dict]:
     """
     Get suggested diseases based on selected symptoms.
 
     Parameters:
-    - selected_symptoms (list): A list of symptoms selected by the user.
+    - selected_symptoms (List[str]): List of symptoms selected by the user.
 
     Returns:
-    - suggested_diseases (list): A list of suggested diseases and common symptoms.
-    - all_symptoms (list): A list of all available symptoms for reference.
-
+    - List[dict]: List of dictionaries containing information about suggested diseases.
+      Each dictionary has keys: 'disease', 'common_symptoms', 'other_symptoms', 'urgency_level'.
     """
+
     suggested_diseases = []
-    selected_symptoms_lower = [symptom.lower() for symptom in selected_symptoms]
-    
+
     for disease, symptoms_list in Diseases.items():
-        common_symptoms = set(selected_symptoms_lower) & set(symptom.lower() for symptom in symptoms_list)
-        if common_symptoms:
-            other_symptoms = [symptom for symptom in symptoms_list if symptom.lower() not in common_symptoms]
+        if set(selected_symptoms).issubset(symptoms_list):
+            other_symptoms = [symptom for symptom in symptoms_list if symptom not in selected_symptoms]
+
             suggested_diseases.append({
                 'disease': disease,
-                'common_symptoms': list(common_symptoms),
-                'other_symptoms': other_symptoms
+                'common_symptoms': selected_symptoms,
+                'other_symptoms': other_symptoms,
+                'urgency_level': calculate_urgency(selected_symptoms)
             })
 
-    # Filtering out diseases with empty common_symptoms
-    suggested_diseases = [disease for disease in suggested_diseases if disease['common_symptoms']]
-
-
-    # Also returns the full list of symptoms for reference sake
-    all_symptoms = Symptoms
-
-    # Calculate overall urgency level based on selected symptoms
-    urgency_level = calculate_urgency(selected_symptoms)
-
-    return suggested_diseases, all_symptoms, urgency_level
+    return suggested_diseases
 
 def calculate_urgency(selected_symptoms):
     """
@@ -59,6 +51,6 @@ def calculate_urgency(selected_symptoms):
     ]
 
     if any(symptom.lower() in selected_symptoms for symptom in critical_symptoms):
-        return "Critical Response"
+        return "Critical!! Seek Medical Care Immediately"
 
-    return "Normal Response"
+    return "Not Critical"
