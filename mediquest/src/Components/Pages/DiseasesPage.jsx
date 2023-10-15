@@ -21,8 +21,15 @@ const DiseasesPage = () => {
         }
 
         const data = await response.json();
-	console.log('Data from backend:', data); //trying to see whats wrong with the backend
-        setDiseases(data.suggested_diseases);
+        console.log('Data from backend:', data);
+
+        // Check the structure of the received data
+        if (data && data.suggested_diseases) {
+          console.log('Received diseases:', data.suggested_diseases);
+          setDiseases(data.suggested_diseases);
+        } else {
+          console.error('No suggested diseases found in the response');
+        }
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error.message);
       }
@@ -30,6 +37,8 @@ const DiseasesPage = () => {
 
     fetchDiseases();
   }, [location.state?.selectedSymptoms]);
+
+  console.log('Final diseases state:', diseases);
 
   return (
     <div className="diseases-page">
@@ -47,3 +56,4 @@ const DiseasesPage = () => {
 }
 
 export default DiseasesPage;
+
