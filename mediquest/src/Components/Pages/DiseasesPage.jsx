@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import './DiseasesPage.css';
 
 const DiseasesPage = () => {
   const [diseases, setDiseases] = useState([]);
@@ -21,15 +22,15 @@ const DiseasesPage = () => {
         }
 
         const data = await response.json();
-        console.log('Data from backend:', data);
+        console.log('Data from backend:', data); // Ensure that the data structure is as expected
 
-        // Check the structure of the received data
-        if (data && data.suggested_diseases) {
-          console.log('Received diseases:', data.suggested_diseases);
-          setDiseases(data.suggested_diseases);
-        } else {
-          console.error('No suggested diseases found in the response');
-        }
+        // Filter diseases based on selected symptoms
+        const filteredDiseases = data.suggested_diseases.filter(disease => {
+          // Assuming selectedSymptoms is an array of symptoms
+          return disease.common_symptoms.every(symptom => location.state?.selectedSymptoms.includes(symptom));
+        });
+
+        setDiseases(filteredDiseases);
       } catch (error) {
         console.error('There was a problem with the fetch operation:', error.message);
       }
@@ -37,8 +38,6 @@ const DiseasesPage = () => {
 
     fetchDiseases();
   }, [location.state?.selectedSymptoms]);
-
-  console.log('Final diseases state:', diseases);
 
   return (
     <div className="diseases-page">
@@ -48,6 +47,9 @@ const DiseasesPage = () => {
           <div key={index} className="disease-item">
             <h2>{disease.disease}</h2>
             <p>Common Symptoms: {disease.common_symptoms ? disease.common_symptoms.join(', ') : 'Not available'}</p>
+            <p>Urgency Level: {disease.urgency_level}</p>
+            {/* Display other symptoms */}
+            <p>Other Symptoms: {disease.other_symptoms ? disease.other_symptoms.join(', ') : 'Not available'}</p>
           </div>
         ))}
       </div>
