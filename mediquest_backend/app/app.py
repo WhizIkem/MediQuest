@@ -1,4 +1,5 @@
 from recommendation import get_suggested_diseases, calculate_urgency
+from location import get_user_location, find_nearest_health_facilities
 from data import Symptoms
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -57,6 +58,33 @@ def get_all_symptoms():
 
     return jsonify({'all_symptoms': Symptoms})
 
+@app.route('/get_user_location', methods=['GET'])
+def get_user_location_endpoint():
+    location = get_user_location()
+    if location:
+        latitude, longitude = location
+        return jsonify({'latitude': latitude, 'longitude': longitude})
+    else:
+        return jsonify({'error': 'Location not available'}), 404
+
+@app.route('/find_nearby_facilities', methods=['GET'])
+def find_nearby_facilities_endpoint():
+    latitude_str = request.args.get('latitude')
+    longitude_str = request.args.get('longitude')
+
+    if not latitude_str or not longitude_str:
+        return jsonify({'error': 'Latitude and longitude parameters are required'}), 400
+
+    try:
+        latitude = float(latitude_str)
+        longitude = float(longitude_str)
+    except ValueError:
+        return jsonify({'error': 'Invalid latitude or longitude format'}), 400
+
+    # Call your function to find nearby facilities
+    results = find_nearby_facilities_json(latitude, longitude)
+    
+    return jsonify(results)
 
 if __name__ == '__main__':
     app.run(debug=True)
