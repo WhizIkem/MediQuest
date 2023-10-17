@@ -37,6 +37,7 @@ def suggest_diseases():
     """
     data = request.get_json()
     selected_symptoms = data.get('selected_symptoms', [])
+    print("Selected Symptoms:", selected_symptoms)
 
     suggested_diseases = get_suggested_diseases(selected_symptoms)
     urgency_level = calculate_urgency(selected_symptoms)

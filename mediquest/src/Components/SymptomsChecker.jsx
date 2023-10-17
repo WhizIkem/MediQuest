@@ -15,8 +15,14 @@ const SymptomChecker = ({ selectedSymptoms = [] }) => {
    */
   const handleSubmit = async () => {
     try {
-      // Fetch data from the backend
-      const response = await fetch('http://localhost:5000/suggest_diseases', {
+	if (selectedSymptoms.length === 0) {
+		console.warn('No symptoms selected. Handle this case accordingly.');
+		return;
+    }
+
+	// Fetch data from the backend
+	console.log("Selected Symptoms:", selectedSymptoms);
+	const response = await fetch('http://localhost:5000/suggest_diseases', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
