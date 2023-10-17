@@ -2,10 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import PlusIcon from "../Assets/plusIcon.svg";
+//import SearchIcon from "../Assets/search.svg"; // Import your search icon image
+import './SymptomSearch.css'; // Import your CSS file
 
 const SymptomSearch = ({ setSelectedSymptoms }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [allSymptoms, setAllSymptoms] = useState([]);
+  const [selectedSuggestions, setSelectedSuggestions] = useState([]); // [symptom1, symptom2, ...
 
   useEffect(() => {
     const fetchSymptoms = async () => {
@@ -13,7 +16,7 @@ const SymptomSearch = ({ setSelectedSymptoms }) => {
         const response = await fetch('http://localhost:5000/all_symptoms');
 
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw Error('Network response was not ok');
         }
 
         const data = await response.json();
@@ -26,22 +29,28 @@ const SymptomSearch = ({ setSelectedSymptoms }) => {
     fetchSymptoms();
   }, []);
 
-  const suggestions = allSymptoms.filter(symptom => symptom.toLowerCase().includes(searchTerm.toLowerCase()));
+  const suggestions = allSymptoms
+    .filter(symptom => symptom.toLowerCase().includes(searchTerm.toLowerCase()))
+    .filter(symptom => !selectedSuggestions.includes(symptom));
 
   const handleSelectedSymptoms = (symptom) => {
     setSelectedSymptoms(prevSymptoms => [...prevSymptoms, symptom]);
     setSearchTerm(""); // clear search term
+    setSelectedSuggestions(prevSelectedSuggestions => [...prevSelectedSuggestions, symptom]);
   }
 
   return (
     <div className="symptom-search">
-      <input
-        type="text"
-        placeholder="Search for symptoms..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-	  <div className="suggestions-container">
+      <div className="search-input-container">
+        <input
+          type="text"
+          placeholder="Search for symptoms..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+          style={{ backgroundRepeat: "no-repeat", backgroundPosition: "8px", backgroundSize: "20px" }}
+        />
+      </div>
       {searchTerm &&
         <div className="suggestions">
           {suggestions.map((symptom, index) => (
@@ -52,7 +61,6 @@ const SymptomSearch = ({ setSelectedSymptoms }) => {
         </div>
       }
     </div>
-	  </div>
   );
 }
 

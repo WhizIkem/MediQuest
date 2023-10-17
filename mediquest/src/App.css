@@ -7,3 +7,27 @@
 .content {
   flex: 1;
 }
+
+/* For Desktop */
+@media (min-width: 1024px) {
+  body {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+}
+
+/* For iPad */
+@media (max-width: 1023px) {
+  body {
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+}
+
+/* For Mobile */
+@media (max-width: 767px) {
+  body {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}

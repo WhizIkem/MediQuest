@@ -14,9 +14,17 @@
   font-weight: 700;
   margin-top: 50px; 
   box-shadow: 4px 4px 0px 0px #000000;
+  margin-left: 150px;
 }
 
 .start-button:hover {
   background-color: #005b6a;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .start-button {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
