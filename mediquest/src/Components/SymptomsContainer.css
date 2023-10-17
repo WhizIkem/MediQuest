@@ -1,5 +1,5 @@
 .symptoms-container {
-  display: flex;
+  display: flow;
   align-items: center;
   justify-content: center;
   background-color: #bdc9bd;

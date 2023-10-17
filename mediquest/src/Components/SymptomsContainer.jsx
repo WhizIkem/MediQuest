@@ -9,7 +9,9 @@ const SymptomsContainer = () => {
   return (
     <div className="symptoms-container">
       <SelectedSymptoms selectedSymptoms={selectedSymptoms} setSelectedSymptoms={setSelectedSymptoms} />
+      <div className="search">
       <SymptomSearch setSelectedSymptoms={setSelectedSymptoms} />
+      </div>
     </div>
   );
 }

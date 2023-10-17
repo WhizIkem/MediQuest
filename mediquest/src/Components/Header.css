@@ -82,6 +82,15 @@
   left: 10px;
 }
 
+.nav-link {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-link.active {
+  color: var(--primary-color);
+}
+
 /* for larger screens (desktops) */
 @media (min-width: 768px) {
   .header {

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './DiseasesPage.css';
+import BackArrow from '../BackArrow';
+import LocationText from '../LocationText';
+import LocationYesButton from '../LocationYesButton';
+import LocationNoButton from '../LocationNoButton';
 
 const DiseasesPage = () => {
   const [diseases, setDiseases] = useState([]);
@@ -40,6 +44,8 @@ const DiseasesPage = () => {
   }, [location.state?.selectedSymptoms]);
 
   return (
+    <>
+    <BackArrow />
     <div className="diseases-page">
       <h1>Possible Diseases</h1>
       <div className="diseases-list">
@@ -54,6 +60,14 @@ const DiseasesPage = () => {
         ))}
       </div>
     </div>
+    <div className="location-access">
+      <LocationText />
+      <div className="location-button">
+        <LocationYesButton />
+        <LocationNoButton />
+      </div>
+    </div>
+    </>
   );
 }
 
