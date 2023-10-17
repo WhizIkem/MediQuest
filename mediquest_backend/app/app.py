@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route('/suggest_diseases', methods=['POST'])
 def suggest_diseases():
@@ -43,13 +43,6 @@ def suggest_diseases():
 
     return jsonify({'suggested_diseases': suggested_diseases, 'urgency_level': urgency_level})
 
-@app.route('/get_symptoms', methods=['GET'])
-def get_symptoms():
-    """
-    Endpoint to get the list of symptoms.
-    """
-    return jsonify({'symptoms': Symptoms})
-
 @app.route('/all_symptoms', methods=['GET'])
 def get_all_symptoms():
     """
@@ -69,21 +62,9 @@ def get_user_location_endpoint():
 
 @app.route('/find_nearby_facilities', methods=['GET'])
 def find_nearby_facilities_endpoint():
-    latitude_str = request.args.get('latitude')
-    longitude_str = request.args.get('longitude')
-
-    if not latitude_str or not longitude_str:
-        return jsonify({'error': 'Latitude and longitude parameters are required'}), 400
-
-    try:
-        latitude = float(latitude_str)
-        longitude = float(longitude_str)
-    except ValueError:
-        return jsonify({'error': 'Invalid latitude or longitude format'}), 400
-
-    # Call your function to find nearby facilities
-    results = find_nearby_facilities_json(latitude, longitude)
-    
+    latitude, longitude = get_user_location()
+    results = find_nearest_health_facilities(latitude, longitude)
+    print(results)
     return jsonify(results)
 
 if __name__ == '__main__':
