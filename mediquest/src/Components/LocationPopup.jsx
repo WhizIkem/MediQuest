@@ -1,35 +1,36 @@
 import React, { useState, useEffect } from 'react';
 
-const LocationPopup = () => {
+const LocationPopup = ({ userLocation, error }) => {
   const [facilities, setFacilities] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchNearbyFacilities = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/find_nearby_facilities');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        console.log('Facilities data:', data);
-        setFacilities(data);
-        setLoading(false); // Set loading to false once data is fetched
-      } catch (error) {
-        console.error('Error fetching nearby facilities:', error.message);
-        setLoading(false); // Set loading to false in case of an error
-      }
-    };
+    if (userLocation) {
+      // Fetch nearby facilities when userLocation is available
+      fetchNearbyFacilities();
+    }
+  }, [userLocation]);
 
-    fetchNearbyFacilities();
-  }, []); // Empty dependency array means this effect runs once on mount
+  const fetchNearbyFacilities = async () => {
+    const { latitude, longitude } = userLocation;
+
+    try {
+      const response = await fetch(`http://localhost:5000/find_nearby_facilities?latitude=${latitude}&longitude=${longitude}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log('Facilities data:', data);
+      setFacilities(data);
+    } catch (error) {
+      console.error('Error fetching nearby facilities:', error.message);
+    }
+  };
 
   return (
     <div>
       <h2>Nearby Facilities</h2>
-      {loading ? (
-        <p>Loading...</p>
-      ) : facilities !== null && facilities.length ? (
+      {error && <p>Error fetching location: {error}</p>}
+      {facilities && facilities.length > 0 ? (
         <ul>
           {facilities.map((facility, index) => (
             <li key={index}>
