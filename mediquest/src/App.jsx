@@ -9,6 +9,7 @@ import SymptomCheckerPage from "./Components/Pages/SymptomCheckerPage";
 import DiseasesPage from "./Components/Pages/DiseasesPage";
 import AboutUs from "./Components/Pages/AboutUs";
 import LocationYesButton from "./Components/LocationYesButton";
+import LocationPage from "./Components/Pages/LocationPage";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
               <Route path="/diseases" element={<DiseasesPage />} />
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/location" element={<LocationYesButton />} />
+              <Route path="/location-page" element={<LocationPage />} />
             </Route>
             </Routes>
         </div>
