@@ -1,42 +1,48 @@
-import React, { useState, useEffect } from "react";
-import "./Location.css";
+import React, { useState, useEffect } from 'react';
 
 const LocationPopup = () => {
-  const [loading, setLoading] = useState(true);
   const [facilities, setFacilities] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch facilities when the component mounts
-    fetch("http://localhost:5000/find_nearby_facilities")
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);  // Log the data
+    const fetchNearbyFacilities = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/find_nearby_facilities');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        console.log('Facilities data:', data);
         setFacilities(data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error("Error fetching facilities:", error.message);
-        setLoading(false);
-      });
-  }, []);
+        setLoading(false); // Set loading to false once data is fetched
+      } catch (error) {
+        console.error('Error fetching nearby facilities:', error.message);
+        setLoading(false); // Set loading to false in case of an error
+      }
+    };
+
+    fetchNearbyFacilities();
+  }, []); // Empty dependency array means this effect runs once on mount
 
   return (
-    <div className="location-popup">
+    <div>
       <h2>Nearby Facilities</h2>
       {loading ? (
-        <p>Loading nearby facilities...</p>
-      ) : (
+        <p>Loading...</p>
+      ) : facilities !== null && facilities.length ? (
         <ul>
-          {facilities && facilities.map((facility) => (
-            <li key={facility.name}>
-              <p>Name: {facility.name}</p>
-              <p>Distance: {facility.distance} meters</p>
-             </li>
+          {facilities.map((facility, index) => (
+            <li key={index}>
+              {facility.name}, Distance: {facility.distance} meters
+            </li>
           ))}
         </ul>
+      ) : (
+        <p>No nearby facilities found.</p>
       )}
     </div>
   );
 };
 
 export default LocationPopup;
+

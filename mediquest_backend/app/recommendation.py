@@ -14,6 +14,8 @@ def get_suggested_diseases(selected_symptoms: List[str]) -> List[dict]:
       Each dictionary has keys: 'disease', 'common_symptoms', 'other_symptoms', 'urgency_level'.
     """
 
+    print("Selected Symptoms in get_suggested_diseases:", selected_symptoms)
+
     suggested_diseases = []
 
     for disease, symptoms_list in Diseases.items():

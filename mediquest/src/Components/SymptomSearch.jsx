@@ -1,5 +1,3 @@
-// SymptomSearch.jsx
-
 import React, { useState, useEffect } from "react";
 import PlusIcon from "../Assets/plusIcon.svg";
 //import SearchIcon from "../Assets/search.svg"; // Import your search icon image
@@ -65,3 +63,4 @@ const SymptomSearch = ({ setSelectedSymptoms }) => {
 }
 
 export default SymptomSearch;
+
