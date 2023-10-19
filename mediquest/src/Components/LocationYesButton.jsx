@@ -1,15 +1,16 @@
-// LocationYesButton.jsx
-
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LocationYesButton = () => {
+  const navigate = useNavigate();
+
+  const handleLocationYesClick = () => {
+    // Navigate to the "LocationPage" when the button is clicked
+    navigate('/location-page');
+  };
+
   return (
-    <div>
-      <Link to="/locations" className="location-yes-button">
-        Yes
-      </Link>
-    </div>
+    <button className="location-yes-button" onClick={handleLocationYesClick}>Yes</button>
   );
 };
 

@@ -1,47 +1,52 @@
-// LocationPage.jsx
+import React, { useState, useEffect } from 'react';
+import BackArrow from '../BackArrow';
+import './LocationPage.css';
 
-import React, { useState, useEffect } from "react";
-
-const LocationPage = () => {
-  const [locations, setLocations] = useState([]);
-  const [error, setError] = useState(null);
+const LocationPage = ({ userLocation, error }) => {
+  const [facilities, setFacilities] = useState([]);
 
   useEffect(() => {
-    // Fetch locations when the component mounts
-    fetchLocations();
-  }, []);
+    if (userLocation) {
+      // Fetch nearby facilities when userLocation is available
+      fetchNearbyFacilities();
+    }
+  }, [userLocation]);
 
-  const fetchLocations = () => {
-    fetch("http://localhost:5000/get_locations") // Adjust the API endpoint
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setLocations(data.locations);
-      })
-      .catch((error) => {
-        setError(error);
-      });
+  const fetchNearbyFacilities = async () => {
+    const { latitude, longitude } = userLocation;
+
+    try {
+      const response = await fetch(`http://localhost:5000/find_nearby_facilities?latitude=${latitude}&longitude=${longitude}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log('Facilities data:', data);
+      setFacilities(data);
+    } catch (error) {
+      console.error('Error fetching nearby facilities:', error.message);
+    }
   };
 
   return (
     <div>
-      <h1>Locations</h1>
-
-      {error && <p>Error fetching locations: {error.message}</p>}
-
-      <ul>
-        {locations.map((location, index) => (
-          <li key={index}>
-            {location.name}: {location.address}
-          </li>
-        ))}
-      </ul>
+      <BackArrow />
+      <h2>Nearby Facilities</h2>
+      {error && <p>Error fetching location: {error}</p>}
+      {facilities && facilities.length > 0 ? (
+        <ul>
+          {facilities.map((facility, index) => (
+            <li key={index}>
+              {facility.name}, Distance: {facility.distance} meters
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No nearby facilities found.</p>
+      )}
     </div>
   );
 };
 
 export default LocationPage;
+

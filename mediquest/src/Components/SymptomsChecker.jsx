@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSymptoms } from "./SymptomContext";
+import "./SymptomsChecker.css";
 
 /**
  * SymptomChecker component for selecting symptoms and checking for suggested diseases.
@@ -7,7 +9,8 @@ import { useNavigate } from "react-router-dom";
  * @param {string[]} props.selectedSymptoms - Array of selected symptoms.
  * @returns {JSX.Element} - Rendered component.
  */
-const SymptomChecker = ({ selectedSymptoms = [] }) => {
+const SymptomChecker = () => {
+  const { selectedSymptoms } = useSymptoms();
   const navigate = useNavigate();
 
   /**
@@ -51,14 +54,8 @@ const SymptomChecker = ({ selectedSymptoms = [] }) => {
 
   return (
     <div>
-      <div>
-        {/* Display selected symptoms */}
-        {selectedSymptoms && selectedSymptoms.map((symptom, index) => (
-          <span key={index}>{symptom}</span>
-        ))}
-      </div>
       {/* Button to check symptoms */}
-      <button onClick={handleSubmit}>Check Symptoms</button>
+      <button className="checksymptoms" onClick={handleSubmit}>Check Symptoms</button>
     </div>
   );
 }
