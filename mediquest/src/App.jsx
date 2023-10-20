@@ -8,7 +8,7 @@ import "./App.css";
 import SymptomCheckerPage from "./Components/Pages/SymptomCheckerPage";
 import DiseasesPage from "./Components/Pages/DiseasesPage";
 import AboutUs from "./Components/Pages/AboutUs";
-import LocationYesButton from "./Components/LocationYesButton";
+// import LocationYesButton from "./Components/LocationYesButton";
 import LocationPage from "./Components/Pages/LocationPage";
 import { SymptomProvider } from "./Components/SymptomContext";
 
@@ -22,6 +22,7 @@ const App = () => {
           <Routes>
             <Route>
               <Route path="/" element={<Homepage />} />
+              <Route path="/mediquest" element={<Homepage />} />
               <Route path="/symptom-checker" element={<SymptomCheckerPage />} />
               <Route path="/diseases" element={<DiseasesPage />} />
               <Route path="/about-us" element={<AboutUs />} />
