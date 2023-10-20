@@ -2,7 +2,7 @@ import React from "react";
 import AboutText from "../AboutText";
 import DeveloperCard from "../DeveloperCard";
 import Omaku from "../../Assets/omaku.jpg";
-import Lhartey from "../../Assets/Lhartey.jpg";
+import Lhartey from "../../Assets/lhartey.jpg";
 import Ikem from "../../Assets/ikem.jpg";
 import BackArrow from "../BackArrow";
 
