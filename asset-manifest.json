@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/mediquest/static/css/main.3d49abda.css",
-    "main.js": "/mediquest/static/js/main.0eefacff.js",
+    "main.js": "/mediquest/static/js/main.814031c1.js",
     "static/media/Image1.jpg": "/mediquest/static/media/Image1.ef91233cd6bea9e9d3ad.jpg",
     "static/media/ikem.jpg": "/mediquest/static/media/ikem.48bd2221bfc145fafd7c.jpg",
     "static/media/Image2.jpg": "/mediquest/static/media/Image2.46c2ace10dd8f981d0ee.jpg",
@@ -14,10 +14,10 @@
     "static/media/plusIcon.svg": "/mediquest/static/media/plusIcon.6f4c72ef03343b37b7b9ae70c7accdfc.svg",
     "index.html": "/mediquest/index.html",
     "main.3d49abda.css.map": "/mediquest/static/css/main.3d49abda.css.map",
-    "main.0eefacff.js.map": "/mediquest/static/js/main.0eefacff.js.map"
+    "main.814031c1.js.map": "/mediquest/static/js/main.814031c1.js.map"
   },
   "entrypoints": [
     "static/css/main.3d49abda.css",
-    "static/js/main.0eefacff.js"
+    "static/js/main.814031c1.js"
   ]
 }
