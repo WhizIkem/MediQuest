@@ -1,21 +1,71 @@
-.suggestions-container {
-  position: relative;
-  max-width: 300px;
-  margin-top: 10px;
+/* SymptomSearch.css */
+
+.symptom-search {
+  position: relative; /* Ensure the parent container is positioned relative */
+}
+
+.search-input-container {
+  position: relative; /* Ensure the search input container is positioned relative */
+}
+
+.search-input {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  max-width: auto;
+  z-index: 1;
 }
 
 .suggestions {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: -1%;
   background-color: #fff;
   border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 8px;
+  width: 100%; /* Ensure the suggestions width matches the search input */
+  max-height: 400px;
+  overflow-y: auto;
   z-index: 1;
 }
 
 .suggestions div {
   cursor: pointer;
   padding: 8px;
+}
+
+.symptom-search {
+  padding: 8px;
+}
+
+.symptom-search div {
+  padding: 8px;
+}
+
+.close-icon {
+  cursor: pointer;
+  margin-left: 8px; 
+  align-items: center;
+}
+
+.close-icon img {
+  width: 16px; 
+  height: 16px; 
+  margin-right: 4px; 
+}
+
+.plusicon {
+  cursor: pointer;
+  margin-left: 8px; 
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+}
+
+.selected-symptoms {
+  display: flex;
+  flex-wrap: wrap;
 }

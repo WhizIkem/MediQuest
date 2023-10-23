@@ -1,4 +1,21 @@
 .App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -6,4 +23,28 @@
 
 .content {
   flex: 1;
+}
+
+/* For Desktop */
+@media (min-width: 1024px) {
+  body {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+}
+
+/* For iPad */
+@media (max-width: 1023px) {
+  body {
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+}
+
+/* For Mobile */
+@media (max-width: 767px) {
+  body {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 }
