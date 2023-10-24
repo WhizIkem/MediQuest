@@ -25,7 +25,7 @@ It utilizes the following develpoping technologies and stacks:
 
 - **Disease Information**: Detailed information about each suggested disease, including symptoms, causes, treatments, and more.
 
-_ **Hospital Locator**: Shows you the near hospitals and clinics near you and how far they are from you in kilometers
+- **Hospital Locator**: Shows you the near hospitals and clinics near you and how far they are from you in kilometers
 
 - **Interactive UI**: An intuitive and user-friendly interface that makes it easy to input symptoms and understand the results.
 
@@ -47,22 +47,22 @@ Before you begin, ensure you have met the following requirements:
 1. Clone the repository:
 
    ```bash
-   :. !git clone https://github.com/WhizIkem/mediquest.git
+   git clone https://github.com/WhizIkem/mediquest.git
 
 2. Change your directory to the project folder:
 	```bash
-	:. !cd mediquest
+	cd mediquest
 
 3. Install the project dependencies:
 	```bash
-	:. !npm install
+	npm install
 
 4. Set up environment variables: 
 Activate the .env file in the project root with the defined and necessary environment variables. 
 
 5. Start the application:
 	```bash
-	:. !npm start
+	npm start
 
 Now, the MediQuest web application should be up and running on http://localhost:3000.
 
@@ -85,17 +85,17 @@ We welcome contributions from the community. To contribute to MediQuest, please 
 2. Create a new branch for your feature or bug fix:
 
    ```bash
-   :. !git checkout -b feature/new-feature
+   git checkout -b feature/new-feature
 
 3. Make your changes, test them thoroughly, and ensure they follow our coding standards.
 
 4. Commit your changes:
 	```bash
-	:. !git commit -m "Add new feature: Your feature description"
+	git commit -m "Add new feature: Your feature description"
 
 5. Push your changes to your fork:
 	```bash
-	:. !git push origin feature/new-feature
+	git push origin feature/new-feature
 
 6. Create a pull request to the main repository.
 
