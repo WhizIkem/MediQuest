@@ -1,12 +1,12 @@
 import requests
 from math import radians, sin, cos, sqrt, atan2
 
-# Function to calculate the distance between two sets of coordinates using Haversine formula
+# Calculates the distance between two sets of coordinates using Haversine formula
 def calculate_distance(coord1, coord2):
     # Radius of the Earth in meters
-    earth_radius = 6371000  # approximately 6,371 kilometers
+    earth_radius = 6371000  
 
-    # Convert coordinates from degrees to radians
+    # Converts coordinates from degrees to radians
     lat1, lon1 = map(radians, coord1)
     lat2, lon2 = map(radians, coord2)
 
@@ -21,7 +21,7 @@ def calculate_distance(coord1, coord2):
     distance = earth_radius * c
     return distance
 
-# Function to get the user's location based on IP address using ip-api.com
+# Gets the user's location based on IP address 
 def get_user_location():
     try:
         response = requests.get('http://ip-api.com/json')
@@ -34,8 +34,9 @@ def get_user_location():
         print(f"Error: {e}")
     return None
 
-# Function to find the nearest health facilities using the HERE Location Services API
+# Finds the nearest health facilities 
 def find_nearest_health_facilities(latitude, longitude):
+
     #URL for the Location Services API
     search_url = 'https://discover.search.hereapi.com/v1/discover'
     api_key = 'AoN49OcFKSSbwmOrCVau3IIQiWHqc0qVQ0eAEmqGTjY'
@@ -52,12 +53,13 @@ def find_nearest_health_facilities(latitude, longitude):
             'limit': 5,
         }
 
-        # API request to search for nearby health facilities
+        # Makes the API request to search for nearby health facilities
         facility_response = requests.get(search_url, params=facility_params)
 
         if facility_response.status_code == 200:
             facility_data = facility_response.json()
             
+            # Processes the data to find the nearest health facilities
             items = facility_data.get('items', [])
             if items:
                 print(f"Nearby {facility_type}s:")
@@ -75,6 +77,7 @@ def find_nearest_health_facilities(latitude, longitude):
             print(f"Request to HERE Location Services for {facility_type}s failed.")
 
 # function to get the user's location
+
 user_location = get_user_location()
 
 if user_location:
