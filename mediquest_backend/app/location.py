@@ -17,7 +17,7 @@ def calculate_distance(coord1, coord2):
     a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
-    # Calculates the distance
+    # Calculating the distance
     distance = earth_radius * c
     return distance
 
@@ -37,16 +37,15 @@ def get_user_location():
 # Finds the nearest health facilities 
 def find_nearest_health_facilities(latitude, longitude):
 
+    #URL for the Location Services API
     search_url = 'https://discover.search.hereapi.com/v1/discover'
-
-
     api_key = 'AoN49OcFKSSbwmOrCVau3IIQiWHqc0qVQ0eAEmqGTjY'
 
-    # Defines the facility types
+    #facility types to search for
     facility_types = ["hospital", "clinic"]
 
     for facility_type in facility_types:
-        # API parameters
+        # parameters for the API request to search for health facilities
         facility_params = {
             'apiKey': api_key,
             'at': f"{latitude},{longitude}",
@@ -59,6 +58,7 @@ def find_nearest_health_facilities(latitude, longitude):
 
         if facility_response.status_code == 200:
             facility_data = facility_response.json()
+            
             # Processes the data to find the nearest health facilities
             items = facility_data.get('items', [])
             if items:
@@ -66,7 +66,7 @@ def find_nearest_health_facilities(latitude, longitude):
                 for item in items:
                     title = item.get('title', 'Facility name not found')
                     address = item.get('address', 'Address not found')
-                    position = item.get('position', {'lat': 0, 'lng': 0})  # Get the position
+                    position = item.get('position', {'lat': 0, 'lng': 0}
                     distance = calculate_distance((latitude, longitude), (position['lat'], position['lng']))
                     print(f"Name: {title}, Distance: {int(distance)} meters")
                     print(f"Address: {address}")
@@ -76,7 +76,8 @@ def find_nearest_health_facilities(latitude, longitude):
         else:
             print(f"Request to HERE Location Services for {facility_type}s failed.")
 
-# Calls the function for the user's location
+# function to get the user's location
+
 user_location = get_user_location()
 
 if user_location:
@@ -84,7 +85,7 @@ if user_location:
     print(f"Latitude: {latitude}")
     print(f"Longitude: {longitude}")
 
-    # Calls the function for the nearest health facilities
+    # function to find the nearest health facilities
     find_nearest_health_facilities(latitude, longitude)
 else:
     print("Location not available.")
